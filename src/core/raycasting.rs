@@ -24,15 +24,10 @@ pub struct Ray {
  * uses dda
  */
 impl Ray {
-    pub fn new(player: &Player, screen_width: usize, x: usize) -> Self {
-        // x pos of camera in camera plane
-        let camera_x: f64 = ((2.0 * x as f64) / screen_width as f64) - 1.0;
-        // x pos of camera in camera plane
-        let dir_x: f64 = player.dir_x + player.plane_x * camera_x; // get an angled ray vector
-        let dir_y: f64 = player.dir_y + player.plane_y * camera_x;
+    pub fn new(dir_x: f64, dir_y: f64) -> Self {
         Ray { dir_x, dir_y }
     }
-    pub fn cast(&self, player: &Player, world_map: &WorldMap) -> Collision {
+    pub fn wall_cast(&self, player: &Player, world_map: &WorldMap) -> Collision {
         let mut map_x: i32 = player.pos_x as i32; // box of map we are in
         let mut map_y: i32 = player.pos_y as i32;
 

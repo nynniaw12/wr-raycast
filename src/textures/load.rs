@@ -19,9 +19,22 @@ pub fn list_textures(path: &str) -> io::Result<Vec<String>> {
     Ok(png_files)
 }
 
-pub fn load_textures(base_path: &str, texture_files: &[String], tex_width: usize, tex_height: usize) -> Vec<Vec<u32>> {
+pub fn load_textures(
+    base_path: &str,
+    texture_files: &[String],
+    tex_width: usize,
+    tex_height: usize,
+) -> Vec<Vec<u32>> {
+    let mut sorted_files = texture_files.to_vec();
+
+    sorted_files.sort_by_key(|file| {
+        file.split('_')
+            .next()
+            .and_then(|num| num.parse::<usize>().ok())
+    });
+
     let mut textures: Vec<Vec<u32>> = Vec::new();
-    for file in texture_files {
+    for file in sorted_files {
         let path = PathBuf::from(base_path).join(file);
         let path_str = path.to_str().unwrap_or("");
         match load_texture(path_str, tex_width, tex_height) {
@@ -31,7 +44,6 @@ pub fn load_textures(base_path: &str, texture_files: &[String], tex_width: usize
     }
     textures
 }
-
 fn load_texture(
     path: &str,
     tex_width: usize,
@@ -43,6 +55,7 @@ fn load_texture(
         tex_height as u32,
         image::imageops::FilterType::Nearest,
     );
+    println!("RLR: Loaded texture at {:?}", path);
     let mut texture: Vec<u32> = Vec::with_capacity(tex_width * tex_height);
     for pixel in resized.pixels() {
         let rgba = pixel.2.to_rgba();

@@ -1,5 +1,5 @@
-use crate::textures::load::list_textures;
 use super::{generated::generate_textures, load::load_textures};
+use crate::textures::load::list_textures;
 use std::io;
 
 #[derive(Debug, Clone)]
