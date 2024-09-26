@@ -1,5 +1,5 @@
+use crate::{core::player::Player, map::world::WorldMap};
 use raylib::{ffi::KeyboardKey, RaylibHandle};
-use crate::{core::player::Player, worldMap::WorldMap};
 
 pub fn handle_movement(rl: &RaylibHandle, player: &mut Player, world_map: &WorldMap) {
     let frametime = rl.get_frame_time();

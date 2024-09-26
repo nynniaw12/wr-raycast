@@ -1,5 +1,5 @@
 use raylib::RaylibHandle;
-use crate::{core::player::Player, worldMap::WorldMap};
+use crate::{core::player::Player, map::world::WorldMap};
 
 pub type InputHandler = fn(&RaylibHandle, &mut Player, &WorldMap);
 

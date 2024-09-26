@@ -14,7 +14,7 @@ impl Default for Player {
     fn default() -> Self {
         Self {
             pos_x: 22.0,
-            pos_y: 12.0,
+            pos_y: 11.5,
             dir_x: -1.0,
             dir_y: 0.0,
             plane_x: 0.0,
