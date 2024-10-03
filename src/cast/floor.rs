@@ -5,9 +5,9 @@ pub fn floor_cast(
         player,
         screen,
         texture_manager,
-        image,
         ..
     }: &mut GameState,
+    draw_pixel: &mut dyn FnMut(usize, usize, u32)
 ) {
     for y in 0..screen.height {
         // leftmost ray
@@ -56,28 +56,14 @@ pub fn floor_cast(
                 [(texture_manager.tex_width as i32 * ty + tx) as usize];
             color = (color >> 1) & 8355711; // make a bit darker
 
-            let r = ((color >> 16) & 0xFF) as u8;
-            let g = ((color >> 8) & 0xFF) as u8;
-            let b = (color & 0xFF) as u8;
-            image.draw_pixel(
-                x as i32,
-                y as i32,
-                raylib::prelude::Color::new(r, g, b, 255),
-            );
+            draw_pixel(x as usize, y as usize, color);
 
             //ceiling (symmetrical, at screenHeight - y - 1 instead of y)
             color = texture_manager.textures[ceiling_texture]
                 [(texture_manager.tex_width as i32 * ty + tx) as usize];
             color = (color >> 1) & 8355711; // make a bit darker
 
-            let r = ((color >> 16) & 0xFF) as u8;
-            let g = ((color >> 8) & 0xFF) as u8;
-            let b = (color & 0xFF) as u8;
-            image.draw_pixel(
-                x as i32,
-                (screen.height - y - 1) as i32,
-                raylib::prelude::Color::new(r, g, b, 255),
-            );
+            draw_pixel(x as usize, y as usize, color);
         }
     }
 }

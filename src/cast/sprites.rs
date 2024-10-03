@@ -6,10 +6,10 @@ pub fn sprite_cast(
         sprite_manager,
         player,
         texture_manager,
-        image,
         screen,
         ..
     }: &mut GameState,
+    draw_pixel: &mut dyn FnMut(usize, usize, u32),
 ) {
     // SPRITE CASTING
     for i in 0..sprite_manager.sprite_count {
@@ -79,13 +79,10 @@ pub fn sprite_cast(
                         .tex as usize]
                         [(texture_manager.tex_width as i32 * tex_y + tex_x) as usize];
                     if (color & 0x00FFFFFF) != 0 {
-                        let r = ((color >> 16) & 0xFF) as u8;
-                        let g = ((color >> 8) & 0xFF) as u8;
-                        let b = (color & 0xFF) as u8;
-                        image.draw_pixel(
-                            stripe as i32,
-                            y,
-                            raylib::prelude::Color::new(r, g, b, 255), //paint pixel if it isn't black, black is the invisible color
+                        draw_pixel(
+                            stripe as usize,
+                            y as usize,
+                            color, //paint pixel if it isn't black, black is the invisible color
                         );
                     }
                 }

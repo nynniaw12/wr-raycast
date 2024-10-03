@@ -6,7 +6,6 @@ use std::cmp::{max, min};
 
 pub fn wall_cast(
     GameState {
-        image,
         player,
         world_map,
         texture_manager,
@@ -14,6 +13,7 @@ pub fn wall_cast(
         screen,
         ..
     }: &mut GameState,
+    draw_pixel: &mut dyn FnMut(usize, usize, u32),
 ) {
     for x in 0..screen.width {
         // x pos of camera in camera plane
@@ -58,10 +58,7 @@ pub fn wall_cast(
             if side == 1 {
                 color = (color >> 1) & 8355711; // Darken y-sides
             }
-            let r = ((color >> 16) & 0xFF) as u8;
-            let g = ((color >> 8) & 0xFF) as u8;
-            let b = (color & 0xFF) as u8;
-            image.draw_pixel(x as i32, y, raylib::prelude::Color::new(r, g, b, 255));
+            draw_pixel(x as usize, y as usize, color);
         }
         sprite_manager.z_buffer[x] = perp_wall_dist;
     }
