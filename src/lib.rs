@@ -21,3 +21,6 @@ pub async fn run() {
         RaycastingGame::start().await;
     }
 }
+
+use include_dir::{include_dir, Dir};
+pub static ASSETS_DIR: Dir = include_dir!("$CARGO_MANIFEST_DIR/src/assets"); // comp time

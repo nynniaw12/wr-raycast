@@ -1,5 +1,5 @@
 use crate::core::{
-    player::Player, screen::Screen, sprites::SpriteManager, textures::TextureManager,
+    player::Player, screen::Screen, sprites::SpriteManager, textures::manager::TextureManager,
 };
 
 use super::map::{
@@ -20,14 +20,8 @@ impl Default for RaycastingGameState {
         let player = Player::default();
         let screen = Screen::default();
         let texture_manager = TextureManager::default();
-
-        // let texture_manager = TextureManager::load(
-        //     "/Users/hasanaybarsari/Desktop/github/rl-raycast/src/assets",
-        //     64,
-        //     64,
-        // )
-        // .unwrap();
         let sprite_manager = SpriteManager::new(SPRITE_MAP.to_vec(), SPRITE_COUNT, &screen);
+
         Self {
             screen,
             player,
