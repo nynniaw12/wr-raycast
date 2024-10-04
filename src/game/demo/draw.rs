@@ -1,7 +1,7 @@
-use super::core::DemoApp;
+use super::state::DemoGameState;
 
 const BLACK: u32 = 0xFF000000;
-pub fn draw_circle(state: &mut DemoApp, draw_pixel: &mut dyn FnMut(usize, usize, u32)) {
+pub fn draw_circle(state: &mut DemoGameState, draw_pixel: &mut dyn FnMut(usize, usize, u32)) {
     let color = &state.color;
     let width = state.screen.width as f32;
     let height = state.screen.height as f32;
@@ -24,7 +24,7 @@ pub fn draw_circle(state: &mut DemoApp, draw_pixel: &mut dyn FnMut(usize, usize,
     }
 }
 
-pub fn draw_square(state: &mut DemoApp, draw_pixel: &mut dyn FnMut(usize, usize, u32)) {
+pub fn draw_square(state: &mut DemoGameState, draw_pixel: &mut dyn FnMut(usize, usize, u32)) {
     let color = &state.color;
     let width = state.screen.width as f32;
     let height = state.screen.height as f32;
@@ -46,7 +46,7 @@ pub fn draw_square(state: &mut DemoApp, draw_pixel: &mut dyn FnMut(usize, usize,
     }
 }
 
-pub fn draw_triangle(state: &mut DemoApp, draw_pixel: &mut dyn FnMut(usize, usize, u32)) {
+pub fn draw_triangle(state: &mut DemoGameState, draw_pixel: &mut dyn FnMut(usize, usize, u32)) {
     let color = &state.color;
     let width = state.screen.width as f32;
     let height = state.screen.height as f32;

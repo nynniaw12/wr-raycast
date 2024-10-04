@@ -1,5 +1,7 @@
-use crate::{core::player::Player, map::world::WorldMap};
-use super::InputAction;
+pub mod movement;
+
+use super::map::world::WorldMap;
+use crate::{core::player::Player, input::InputAction};
 
 pub type InputHandler = fn(&[InputAction], &mut Player, &WorldMap, frame_time: f64);
 

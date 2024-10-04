@@ -31,3 +31,8 @@ web-sys = { version = "0.3", features = [ # js methods and structs
     "Window",
     "Element",
 ]}
+
+[features]
+default = ["raycasting"]
+raycasting = []
+demo = []

@@ -1,16 +1,4 @@
-use crate::{
-    // backends::{
-    //     wgpu::{
-    //         backend::WGPUBackend,
-    //         demo::{
-    //             control::handle_controls,
-    //             draw::{draw_circle, draw_square, draw_triangle},
-    //         },
-    //     },
-    //     GameBackend,
-    // },
-    core::screen::Screen,
-};
+use crate::core::screen::Screen;
 
 pub enum Shape {
     CIRCLE,
@@ -43,13 +31,13 @@ impl Color {
     }
 }
 
-pub struct DemoApp {
+pub struct DemoGameState {
     pub shape: Shape,
     pub color: Color,
     pub screen: Screen,
 }
 
-impl DemoApp {
+impl DemoGameState {
     pub fn new(screen: Screen) -> Self {
         Self {
             color: Color::new(255, 255, 255),
@@ -76,30 +64,3 @@ impl DemoApp {
         self.color.cycle(-25);
     }
 }
-
-// #[cfg(target_arch = "wasm32")]
-// use wasm_bindgen::prelude::*;
-
-// #[cfg_attr(target_arch = "wasm32", wasm_bindgen(start))]
-// pub async fn run() {
-//     let screen = Screen::default();
-//     let mut backend = WGPUBackend::new(screen, "Demo".to_string());
-//     let mut game_state = DemoApp::new(screen);
-
-//     backend
-//         .run(|draw_pixel, inputs, _frame_time| {
-//             handle_controls(inputs, &mut game_state);
-//             match game_state.shape {
-//                 Shape::CIRCLE => {
-//                     draw_circle(&mut game_state, draw_pixel);
-//                 }
-//                 Shape::SQUARE => {
-//                     draw_square(&mut game_state, draw_pixel);
-//                 }
-//                 Shape::TRIANGLE => {
-//                     draw_triangle(&mut game_state, draw_pixel);
-//                 }
-//             }
-//         })
-//         .await;
-// }

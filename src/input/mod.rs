@@ -1,6 +1,3 @@
-pub mod movement;
-pub mod handler;
-
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum InputAction {
     MoveForward,

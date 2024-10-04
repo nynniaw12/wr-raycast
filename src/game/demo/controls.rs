@@ -1,9 +1,9 @@
 use crate::input::InputAction;
-use super::core::DemoApp;
+use super::state::DemoGameState;
 
 pub fn handle_controls(
     inputs: &[InputAction],
-    state: &mut DemoApp,
+    state: &mut DemoGameState,
 ) {
     for action in inputs {
         match action {

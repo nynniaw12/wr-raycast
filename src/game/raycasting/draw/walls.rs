@@ -1,18 +1,15 @@
-use crate::{
-    core::{player::Player, state::GameState},
-    map::world::WorldMap,
-};
+use crate::{core::player::Player, game::raycasting::{map::world::WorldMap, state::RaycastingGameState}};
 use std::cmp::{max, min};
 
 pub fn wall_cast(
-    GameState {
+    RaycastingGameState {
         player,
         world_map,
         texture_manager,
         sprite_manager,
         screen,
         ..
-    }: &mut GameState,
+    }: &mut RaycastingGameState,
     draw_pixel: &mut dyn FnMut(usize, usize, u32),
 ) {
     for x in 0..screen.width {

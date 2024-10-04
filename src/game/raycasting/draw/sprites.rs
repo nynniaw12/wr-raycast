@@ -1,14 +1,14 @@
-use crate::core::state::GameState;
 use std::cmp::{max, min};
+use crate::game::raycasting::state::RaycastingGameState;
 
 pub fn sprite_cast(
-    GameState {
+    RaycastingGameState {
         sprite_manager,
         player,
         texture_manager,
         screen,
         ..
-    }: &mut GameState,
+    }: &mut RaycastingGameState,
     draw_pixel: &mut dyn FnMut(usize, usize, u32),
 ) {
     // SPRITE CASTING

@@ -1,12 +1,12 @@
-use crate::core::state::GameState;
+use crate::game::raycasting::state::RaycastingGameState;
 
 pub fn floor_cast(
-    GameState {
+    RaycastingGameState {
         player,
         screen,
         texture_manager,
         ..
-    }: &mut GameState,
+    }: &mut RaycastingGameState,
     draw_pixel: &mut dyn FnMut(usize, usize, u32),
 ) {
     for y in 0..screen.height {

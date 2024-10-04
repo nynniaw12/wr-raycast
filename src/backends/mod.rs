@@ -2,8 +2,8 @@ use std::future::Future;
 
 use crate::{core::screen::Screen, input::InputAction};
 
-// #[cfg(not(target_arch = "wasm32"))]
-// pub mod raylib;
+#[cfg(not(target_arch = "wasm32"))]
+pub mod raylib;
 
 pub mod wgpu;
 
