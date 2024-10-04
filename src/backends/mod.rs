@@ -1,7 +1,10 @@
 use std::future::Future;
 
-use crate::{core::screen::Screen, input::handler::InputAction};
-pub mod raylib;
+use crate::{core::screen::Screen, input::InputAction};
+
+// #[cfg(not(target_arch = "wasm32"))]
+// pub mod raylib;
+
 pub mod wgpu;
 
 pub trait GameBackend {

@@ -1,8 +1,8 @@
-use super::io::{list_textures, load_textures};
-use std::io;
+// use super::io::{list_textures, load_textures};
+// use std::io;
 
 pub fn generate_textures(tex_width: usize, tex_height: usize) -> Vec<Vec<u32>> {
-    let mut textures: Vec<Vec<u32>> = vec![vec![0; tex_width * tex_height]; 8];
+    let mut textures: Vec<Vec<u32>> = vec![vec![0; tex_width * tex_height]; 11];
 
     for x in 0..tex_width {
         for y in 0..tex_height {
@@ -19,6 +19,10 @@ pub fn generate_textures(tex_width: usize, tex_height: usize) -> Vec<Vec<u32>> {
                 0xC00000 * if x % 16 == 0 && y % 16 == 0 { 1 } else { 0 };
             textures[6][tex_width * y + x] = ycolor << 16;
             textures[7][tex_width * y + x] = 0x808080;
+
+            textures[8][tex_width * y + x] = 0x808080;
+            textures[9][tex_width * y + x] = 0x808080;
+            textures[10][tex_width * y + x] = 0x808080;
         }
     }
 
@@ -49,14 +53,14 @@ impl TextureManager {
             textures,
         }
     }
-    pub fn load(path: &str, tex_width: usize, tex_height: usize) -> io::Result<Self> {
-        let tex_paths = list_textures(path)?;
-        let textures = load_textures(path, &tex_paths, tex_width, tex_height);
+    // pub fn load(path: &str, tex_width: usize, tex_height: usize) -> io::Result<Self> {
+    //     let tex_paths = list_textures(path)?;
+    //     let textures = load_textures(path, &tex_paths, tex_width, tex_height);
 
-        Ok(Self {
-            tex_width,
-            tex_height,
-            textures,
-        })
-    }
+    //     Ok(Self {
+    //         tex_width,
+    //         tex_height,
+    //         textures,
+    //     })
+    // }
 }

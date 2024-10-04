@@ -7,7 +7,7 @@ pub fn floor_cast(
         texture_manager,
         ..
     }: &mut GameState,
-    draw_pixel: &mut dyn FnMut(usize, usize, u32)
+    draw_pixel: &mut dyn FnMut(usize, usize, u32),
 ) {
     for y in 0..screen.height {
         // leftmost ray
@@ -58,12 +58,11 @@ pub fn floor_cast(
 
             draw_pixel(x as usize, y as usize, color);
 
-            //ceiling (symmetrical, at screenHeight - y - 1 instead of y)
+            // ceiling (symmetrical, at screenHeight - y - 1 instead of y)
             color = texture_manager.textures[ceiling_texture]
                 [(texture_manager.tex_width as i32 * ty + tx) as usize];
             color = (color >> 1) & 8355711; // make a bit darker
-
-            draw_pixel(x as usize, y as usize, color);
+            draw_pixel(x as usize, (screen.height - 1 - y) as usize, color);
         }
     }
 }

@@ -3,9 +3,6 @@ use super::fps::FpsCounter;
 use wgpu::util::DeviceExt;
 use winit::{dpi::LogicalSize, window::Window};
 
-#[cfg(target_arch = "wasm32")]
-use wasm_bindgen::prelude::*;
-
 pub struct WGPUState<'a> {
     // wgpu ctx
     surface: wgpu::Surface<'a>,

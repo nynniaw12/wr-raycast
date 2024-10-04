@@ -1,4 +1,4 @@
-use crate::{backends::GameBackend, core::screen::Screen, input::handler::InputAction};
+use crate::{backends::GameBackend, core::screen::Screen, input::InputAction};
 use raylib::prelude::*;
 
 pub struct RaylibBackend {
@@ -27,22 +27,29 @@ impl GameBackend for RaylibBackend {
     {
         while !self.rl.window_should_close() {
             let mut actions = Vec::new();
-            if self.rl.is_key_down(KeyboardKey::KEY_LEFT_SHIFT)
-                || self.rl.is_key_down(KeyboardKey::KEY_RIGHT_SHIFT)
-            {
+            if self.rl.is_key_down(KeyboardKey::KEY_LEFT_SHIFT) {
                 actions.push(InputAction::Sprint);
             }
-            if self.rl.is_key_down(KeyboardKey::KEY_W) {
+            if self.rl.is_key_down(KeyboardKey::KEY_UP) {
                 actions.push(InputAction::MoveForward);
             }
-            if self.rl.is_key_down(KeyboardKey::KEY_S) {
+            if self.rl.is_key_down(KeyboardKey::KEY_DOWN) {
                 actions.push(InputAction::MoveBackward);
             }
-            if self.rl.is_key_down(KeyboardKey::KEY_A) {
+            if self.rl.is_key_down(KeyboardKey::KEY_LEFT) {
                 actions.push(InputAction::TurnLeft);
             }
-            if self.rl.is_key_down(KeyboardKey::KEY_D) {
+            if self.rl.is_key_down(KeyboardKey::KEY_RIGHT) {
                 actions.push(InputAction::TurnRight);
+            }
+            if self.rl.is_key_down(KeyboardKey::KEY_T) {
+                actions.push(InputAction::T);
+            }
+            if self.rl.is_key_down(KeyboardKey::KEY_C) {
+                actions.push(InputAction::C);
+            }
+            if self.rl.is_key_down(KeyboardKey::KEY_S) {
+                actions.push(InputAction::S);
             }
             let frame_time = self.rl.get_frame_time();
 

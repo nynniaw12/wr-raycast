@@ -1,13 +1,6 @@
 use crate::{core::player::Player, map::world::WorldMap};
+use super::InputAction;
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum InputAction {
-    MoveForward,
-    MoveBackward,
-    TurnLeft,
-    TurnRight,
-    Sprint,
-}
 pub type InputHandler = fn(&[InputAction], &mut Player, &WorldMap, frame_time: f64);
 
 pub fn handle_input(

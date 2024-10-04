@@ -1,7 +1,7 @@
 use crate::{
     backends::{wgpu::state::WGPUState, GameBackend},
     core::screen::Screen,
-    input::handler::InputAction,
+    input::InputAction,
 };
 use winit::{
     dpi::LogicalSize,
@@ -18,12 +18,6 @@ pub struct WGPUBackend {
 
 impl GameBackend for WGPUBackend {
     fn new(screen: Screen, title: String) -> Self {
-        Self { screen, title }
-    }
-    async fn run<F>(&mut self, mut game: F)
-    where
-        F: FnMut(&mut dyn FnMut(usize, usize, u32), &[InputAction], f64),
-    {
         cfg_if::cfg_if! {
             if #[cfg(target_arch = "wasm32")] {
                 std::panic::set_hook(Box::new(console_error_panic_hook::hook));
@@ -32,6 +26,12 @@ impl GameBackend for WGPUBackend {
                 env_logger::init();
             }
         }
+        Self { screen, title }
+    }
+    async fn run<F>(&mut self, mut game: F)
+    where
+        F: FnMut(&mut dyn FnMut(usize, usize, u32), &[InputAction], f64),
+    {
         let size = LogicalSize::new(self.screen.width as u32, self.screen.height as u32);
         let event_loop = EventLoop::new().unwrap();
         let window = WindowBuilder::new()
@@ -69,6 +69,7 @@ impl GameBackend for WGPUBackend {
         }
 
         let mut state = WGPUState::new(&window, &size, &self.screen).await;
+        log::info!("TEST TEST");
         let mut surface_configured = false;
         let mut actions = Vec::new();
 
@@ -115,17 +116,22 @@ impl GameBackend for WGPUBackend {
                                 ..
                             } => {
                                 let action = match keycode {
+                                    PhysicalKey::Code(KeyCode::KeyT) => Some(InputAction::T),
+                                    PhysicalKey::Code(KeyCode::KeyC) => Some(InputAction::C),
+                                    PhysicalKey::Code(KeyCode::KeyS) => Some(InputAction::S),
                                     PhysicalKey::Code(KeyCode::ShiftLeft) => {
                                         Some(InputAction::Sprint)
                                     }
-                                    PhysicalKey::Code(KeyCode::KeyW) => {
+                                    PhysicalKey::Code(KeyCode::ArrowUp) => {
                                         Some(InputAction::MoveForward)
                                     }
-                                    PhysicalKey::Code(KeyCode::KeyS) => {
+                                    PhysicalKey::Code(KeyCode::ArrowDown) => {
                                         Some(InputAction::MoveBackward)
                                     }
-                                    PhysicalKey::Code(KeyCode::KeyA) => Some(InputAction::TurnLeft),
-                                    PhysicalKey::Code(KeyCode::KeyD) => {
+                                    PhysicalKey::Code(KeyCode::ArrowLeft) => {
+                                        Some(InputAction::TurnLeft)
+                                    }
+                                    PhysicalKey::Code(KeyCode::ArrowRight) => {
                                         Some(InputAction::TurnRight)
                                     }
                                     _ => None,

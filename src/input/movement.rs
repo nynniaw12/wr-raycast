@@ -1,4 +1,4 @@
-use super::handler::InputAction;
+use super::InputAction;
 use crate::{core::player::Player, map::world::WorldMap};
 
 pub fn handle_movement(
@@ -16,11 +16,11 @@ pub fn handle_movement(
 
     for action in inputs {
         match action {
-            InputAction::Sprint => (),
             InputAction::TurnRight => rotate_player(player, -rot_speed),
             InputAction::TurnLeft => rotate_player(player, rot_speed),
             InputAction::MoveBackward => move_player(player, world_map, -move_speed),
             InputAction::MoveForward => move_player(player, world_map, move_speed),
+            _ => ()
         }
     }
 }
