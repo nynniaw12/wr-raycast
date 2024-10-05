@@ -62,6 +62,8 @@ impl GameBackend for WGPUBackend {
                         .expect("Couldn't append FPS counter to document body.");
 
                     let canvas = web_sys::Element::from(window.canvas()?);
+                    canvas.set_id("_wgpu-canvas");
+
                     dst.append_child(&canvas).ok()?;
                     Some(())
                 })
@@ -172,10 +174,23 @@ impl GameBackend for WGPUBackend {
                                         let r = ((color >> 16) & 0xFF) as u8;
                                         let g = ((color >> 8) & 0xFF) as u8;
                                         let b = (color & 0xFF) as u8;
-                                        state.pixels[index] = b; // Red channel
-                                        state.pixels[index + 1] = g; // Green channel
-                                        state.pixels[index + 2] = r; // Blue channel
-                                        state.pixels[index + 3] = 255; // Alpha channel
+
+                                        // todo: better matching
+                                        #[cfg(not(target_arch = "wasm32"))]
+                                        {
+                                            state.pixels[index] = b;
+                                            state.pixels[index + 1] = g;
+                                            state.pixels[index + 2] = r;
+                                            state.pixels[index + 3] = 255; // Alpha channel
+                                        }
+
+                                        #[cfg(target_arch = "wasm32")]
+                                        {
+                                            state.pixels[index] = r;
+                                            state.pixels[index + 1] = g;
+                                            state.pixels[index + 2] = b;
+                                            state.pixels[index + 3] = 255; // Alpha channel
+                                        }
                                     },
                                     &actions,
                                     frame_time,

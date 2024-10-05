@@ -31,11 +31,10 @@ pub fn load_textures(tex_height: usize, tex_width: usize) -> Vec<Vec<u32>> {
         println!("Loaded texture at {:?}", file.path());
         let mut texture: Vec<u32> = Vec::with_capacity(tex_width * tex_height);
         for pixel in resized.pixels() {
-            // todo: proc color
             let rgba = pixel.2.to_rgba();
-            let b = rgba[0] as u32;
+            let r = rgba[0] as u32;
             let g = rgba[1] as u32;
-            let r = rgba[2] as u32;
+            let b = rgba[2] as u32;
             let a = rgba[3] as u32;
             let color = (r << 16) | (g << 8) | b | (a << 24);
             texture.push(color);

@@ -1527,28 +1527,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "19b30a45b0cd0bcca8037f3d0dc3421eaf95327a17cad11964fb8179b4fc4832"
 
 [[package]]
-name = "rl-raycast"
-version = "0.1.0"
-dependencies = [
- "bytemuck",
- "cfg-if 1.0.0",
- "chrono",
- "console_error_panic_hook",
- "console_log",
- "env_logger",
- "image",
- "include_dir",
- "log",
- "pollster",
- "raylib",
- "wasm-bindgen",
- "wasm-bindgen-futures",
- "web-sys",
- "wgpu",
- "winit",
-]
-
-[[package]]
 name = "rustc-hash"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2573,6 +2551,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "68a9bda4691f099d435ad181000724da8e5899daa10713c2d432552b9ccd3a6f"
 dependencies = [
  "memchr",
+]
+
+[[package]]
+name = "wr-raycast"
+version = "0.1.0"
+dependencies = [
+ "bytemuck",
+ "cfg-if 1.0.0",
+ "chrono",
+ "console_error_panic_hook",
+ "console_log",
+ "env_logger",
+ "image",
+ "include_dir",
+ "log",
+ "pollster",
+ "raylib",
+ "wasm-bindgen",
+ "wasm-bindgen-futures",
+ "web-sys",
+ "wgpu",
+ "winit",
 ]
 
 [[package]]

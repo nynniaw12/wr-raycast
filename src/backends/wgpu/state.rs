@@ -8,7 +8,7 @@ pub struct WGPUState<'a> {
     surface: wgpu::Surface<'a>,
     device: wgpu::Device,
     queue: wgpu::Queue,
-    config: wgpu::SurfaceConfiguration,
+    pub config: wgpu::SurfaceConfiguration,
     pub size: LogicalSize<u32>,
 
     // window must be initialized after surface
@@ -273,16 +273,6 @@ impl<'a> WGPUState<'a> {
             self.surface.configure(&self.device, &self.config); // resize
         }
     }
-
-    // // returns true if the main loop won't process the event any further
-    // fn input(&mut self, event: &WindowEvent) -> bool {
-    //     (self.input_handler)(self, event)
-    // }
-
-    // // software rendering
-    // fn update(&mut self) {
-    //     (self.update_fn)(self)
-    // }
 
     pub fn render(&mut self) -> Result<(), wgpu::SurfaceError> {
         let output = self.surface.get_current_texture()?; //  new surface texture we will render
