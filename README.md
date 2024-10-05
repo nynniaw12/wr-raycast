@@ -16,3 +16,6 @@ make TARGET=web build # build for web
 ```
 
 ## [Demo](https://curious-semifreddo-32a300.netlify.app)
+
+## Other
+License is MIT. Feel free to contribute.
