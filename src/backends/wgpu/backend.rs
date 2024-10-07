@@ -71,7 +71,6 @@ impl GameBackend for WGPUBackend {
         }
 
         let mut state = WGPUState::new(&window, &size, &self.screen).await;
-        log::info!("TEST TEST");
         let mut surface_configured = false;
         let mut actions = Vec::new();
 
